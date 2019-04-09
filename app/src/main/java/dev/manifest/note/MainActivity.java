@@ -1,5 +1,6 @@
 package dev.manifest.note;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dev.manifest.note.model.NoteEntity;
 import dev.manifest.note.ui.NotesAdapter;
 import dev.manifest.note.util.SampleData;
@@ -42,15 +44,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initRecyclerView();
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         notesData.addAll(SampleData.getNotes());
         for (NoteEntity note : notesData) {
@@ -78,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.fab)
+    void fabClickHandler() {
+        Intent intent = new Intent(this, EditorActivity.class);
+        startActivity(intent);
     }
 
     public void initRecyclerView() {
