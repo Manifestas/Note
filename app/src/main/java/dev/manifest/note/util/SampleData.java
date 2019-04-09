@@ -27,7 +27,7 @@ public class SampleData {
         return cal.getTime();
     }
 
-    private static List<NoteEntity> getNotes() {
+    public static List<NoteEntity> getNotes() {
         List<NoteEntity> notes = new ArrayList<>();
         notes.add(new NoteEntity(1, getDate(0), SAMPLE_TEXT_1));
         notes.add(new NoteEntity(1, getDate(-1), SAMPLE_TEXT_2));

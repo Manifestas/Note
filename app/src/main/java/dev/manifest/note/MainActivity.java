@@ -7,17 +7,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dev.manifest.note.model.NoteEntity;
+import dev.manifest.note.util.SampleData;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    private List<NoteEntity> notesData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        notesData.addAll(SampleData.getNotes());
+        for (NoteEntity note : notesData) {
+            Log.i(TAG, note.toString());
+        }
     }
 
     @Override
