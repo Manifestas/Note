@@ -1,16 +1,24 @@
-package dev.manifest.note.model;
+package dev.manifest.note.database;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
+@Entity(tableName = "notes")
 public class NoteEntity {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private Date date;
     private String text;
 
+    @Ignore
     public NoteEntity() {
     }
 
+    @Ignore
     public NoteEntity(int id, Date date) {
         this.id = id;
         this.date = date;

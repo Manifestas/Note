@@ -13,7 +13,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.manifest.note.R;
-import dev.manifest.note.model.NoteEntity;
+import dev.manifest.note.database.NoteEntity;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
