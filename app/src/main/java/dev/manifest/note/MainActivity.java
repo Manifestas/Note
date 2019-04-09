@@ -18,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.manifest.note.model.NoteEntity;
+import dev.manifest.note.ui.NotesAdapter;
 import dev.manifest.note.util.SampleData;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    private NotesAdapter notesAdapter;
 
     private List<NoteEntity> notesData = new ArrayList<>();
 
@@ -81,5 +84,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        notesAdapter = new NotesAdapter(notesData, this);
+        recyclerView.setAdapter(notesAdapter);
     }
 }
