@@ -1,5 +1,6 @@
 package dev.manifest.note;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import butterknife.OnClick;
 import dev.manifest.note.database.NoteEntity;
 import dev.manifest.note.ui.NotesAdapter;
 import dev.manifest.note.util.SampleData;
+import dev.manifest.note.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    private MainViewModel viewModel;
     private NotesAdapter notesAdapter;
 
     private List<NoteEntity> notesData = new ArrayList<>();
@@ -40,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        initViewModel();
         initRecyclerView();
 
-        notesData.addAll(SampleData.getNotes());
+        notesData.addAll(viewModel.getNotes());
         for (NoteEntity note : notesData) {
             Log.i(TAG, note.toString());
         }
@@ -74,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
     void fabClickHandler() {
         Intent intent = new Intent(this, EditorActivity.class);
         startActivity(intent);
+    }
+
+    public void initViewModel() {
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
     }
 
     public void initRecyclerView() {
